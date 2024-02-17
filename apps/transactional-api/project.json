@@ -1,0 +1,61 @@
+{
+  "name": "transactional-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/transactional-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/transactional-api",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/transactional-api/src/main.ts",
+        "tsConfig": "apps/transactional-api/tsconfig.app.json",
+        "assets": ["apps/transactional-api/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "generateLockfile": true,
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "transactional-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "transactional-api:build:development"
+        },
+        "production": {
+          "buildTarget": "transactional-api:build:production"
+        }
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/transactional-api/Dockerfile . -t transactional-api"
+    }
+  },
+  "tags": []
+}
