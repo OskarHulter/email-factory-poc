@@ -19,6 +19,16 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
+    },
+    "@nx/js:swc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "@nx/rollup:rollup": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "plugins": [
@@ -35,5 +45,12 @@
       }
     }
   ],
-  "nxCloudAccessToken": "OGU5OTg0ZTAtM2JkYS00YjllLWJiZDEtNjI1YzEwZGY2OTZlfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "OGU5OTg0ZTAtM2JkYS00YjllLWJiZDEtNjI1YzEwZGY2OTZlfHJlYWQtd3JpdGU=",
+  "generators": {
+    "@nx/react": {
+      "library": {
+        "unitTestRunner": "jest"
+      }
+    }
+  }
 }

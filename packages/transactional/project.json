@@ -1,0 +1,24 @@
+{
+  "name": "transactional",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/transactional/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/transactional",
+        "main": "packages/transactional/src/index.ts",
+        "tsConfig": "packages/transactional/tsconfig.lib.json",
+        "assets": ["packages/transactional/*.md"],
+        "skipTypeCheck": true
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs transactional {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    }
+  },
+  "tags": ["scope:shared"]
+}

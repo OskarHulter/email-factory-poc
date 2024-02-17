@@ -2,3 +2,6 @@
 /dist
 /coverage
 /.nx/cache
+.yarn
+.vscode
+.verdaccio
